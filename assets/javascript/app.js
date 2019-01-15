@@ -17,7 +17,10 @@ var config = {
   // Create a variable to reference the database.
   var database = firebase.database();
 
+  //ADD FIREBASE SCHEDULE
+
   //EDIT BELOW TO MATCH HTML FORM
+
   // Initial Values
     var highPrice = 0;
     var highBidder = "No one :-(";
