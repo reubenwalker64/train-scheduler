@@ -88,8 +88,8 @@ $("#add-train-btn").on("click", function(event) {
       $("<td>").text(destination),
       $("<td>").text(firstTrainPretty),
       $("<td>").text(empMonths),
-      $("<td>").text(frequency),
-      $("<td>").text(empBilled)
+      $("<td>").text(frequency)
+      
     );
   
     // Append the new row to the table
