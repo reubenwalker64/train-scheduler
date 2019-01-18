@@ -47,13 +47,14 @@ $("#add-train-btn").on("click", function(event) {
     alert("Train successfully added");
   
     // Clears all of the text-boxes
-    $("#employee-name-input").val("");
+    $("#train-name-input").val("");
     $("#destination-input").val("");
     $("#firstTrain-input").val("");
     $("#frequency-input").val("");
   });
   
   // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
+  // childSnapshot correct???
   database.ref().on("child_added", function(childSnapshot) {
     console.log(childSnapshot.val());
   
@@ -73,27 +74,30 @@ $("#add-train-btn").on("click", function(event) {
     // Prettify the employee start
     var firstTrainPretty = moment.unix(firstTrain).format("MM/DD/YYYY");
   
-    // Calculate the months worked using hardcore math
-    // To calculate the months worked
-    var empMonths = moment().diff(moment(firstTrain, "X"), "months");
-    console.log(empMonths);
+    // Calculate the NEXT ARRIVAL AND/OR MINUTES AWAY using hardcore math
+    // change "months", change "x"???
+    var trainArrival = moment().diff(moment(firstTrain, "X"), "months");
+    console.log(trainArrival);
   
     // Calculate the total billed rate
-    var empBilled = empMonths * frequency;
+    //EDIT THIS TO GET NEXT ARRIVAL OR MINUTES AWAY
+    var empBilled = trainArrival * frequency;
     console.log(empBilled);
   
     // Create the new row
+    // CONVERT firstTrainPretty TO MINUTES AWAY
     var newRow = $("<tr>").append(
       $("<td>").text(trainName),
       $("<td>").text(destination),
-      $("<td>").text(firstTrainPretty),
-      $("<td>").text(empMonths),
-      $("<td>").text(frequency)
+      $("<td>").text(frequency),
+      $("<td>").text(trainArrival),
+      $("<td>").text(firstTrainPretty)
+      
       
     );
   
     // Append the new row to the table
-    $("#employee-table > tbody").append(newRow);
+    $("#train-table > tbody").append(newRow);
   });
   
   // Example Time Math
