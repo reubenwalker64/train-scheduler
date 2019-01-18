@@ -24,6 +24,7 @@ $("#add-train-btn").on("click", function(event) {
     // Grabs user input
     var trainName = $("#train-name-input").val().trim();
     var destination = $("#destination-input").val().trim();
+    // drop , "MM/DD/YYYY").format("X") ???
     var firstTrain = moment($("#firstTrain-input").val().trim(), "MM/DD/YYYY").format("X");
     var frequency = $("#frequency-input").val().trim();
   
@@ -33,6 +34,7 @@ $("#add-train-btn").on("click", function(event) {
       city: destination,
       start: firstTrain,
       frequency: frequency
+    // add - dateAdded: firebase.database.ServerValue.TIMESTAMP ???
     };
   
     // Uploads employee data to the database
@@ -54,8 +56,8 @@ $("#add-train-btn").on("click", function(event) {
   });
   
   // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
-  // childSnapshot correct???
-  database.ref().on("child_added", function(childSnapshot) {
+  // childSnapshot correct??? add prevChildKey ???
+  database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     console.log(childSnapshot.val());
   
     // Store everything into a variable.
@@ -70,6 +72,8 @@ $("#add-train-btn").on("click", function(event) {
     console.log(firstTrain);
     console.log(frequency);
   
+    //CREATE NEXT ARRIVAL FUNCTION
+    
     //CHANGE empStart TO firstTrain ???
     // Prettify the employee start
     var firstTrainPretty = moment.unix(firstTrain).format("MM/DD/YYYY");
@@ -100,97 +104,9 @@ $("#add-train-btn").on("click", function(event) {
     $("#train-table > tbody").append(newRow);
   });
   
-  // Example Time Math
-  // -----------------------------------------------------------------------------
-  // Assume Employee start date of January 1, 2015
-  // Assume current date is March 1, 2016
+//CREATE NEXT ARRIVAL FUNCTION
+
   
-  // We know that this is 15 months.
-  // Now we will create code in moment.js to confirm that any attempt we use meets this test case
-  
-//ADD FIREBASE CLASS ACTIVITY
-/*EDIT BELOW TO MATCH ABOVE WITH TRAIN INFO
-
-// Initial Values
-var employeeName = "";
-var role = "";
-var startDate = 0;
-var monthlyRate = "";
-
-// Capture Button Click
-$("#submit-bid").on("click", function(event) {
-  event.preventDefault();
-
-
-  // Grabbed values from text boxes
-  employeeName = $("#employeeName").val().trim();
-  role = $("#role").val().trim();
-  startDate = $("#startDate").val().trim();
-  monthlyRate = $("#monthlyRate").val().trim();
-
-  console.log(employeeName);
-  console.log(role);
-  console.log(startDate);
-  console.log(monthlyRate);
-
-  // Code for handling the push
-  database.ref().push({
-    employeeName: employeeName,
-    role: role,
-    startDate: startDate,
-    monthlyRate: monthlyRate,
-    dateAdded: firebase.database.ServerValue.TIMESTAMP
-  });
-
-});
-
-// Firebase watcher .on("child_added"
-database.ref().on("child_added", function(snapshot) {
-
-  //USE RECENT USER WITH ALL USERS SOLVED EXAMPLE???  YES CHANGE BELOW
-  // Log everything that's coming out of snapshot
-  console.log(childSnapshot.val().employeeName);
-  console.log(childSnapshot.val().role);
-  console.log(childSnapshot.val().startName);
-  console.log(childSnapshot.val().monthlyRate);
-  /*
-  //ADD MONTHS WORKED AND TOTAL BILLED???
-  console.log(childSnapshot.val().comment);
-  console.log(childSnapshot.val().joinDate);
-
-  // full list of items to the well
-  $("#full-member-list").append("<div class='well'><span class='member-name'> " +
-    childSnapshot.val().name +
-    " </span><span class='member-email'> " + childSnapshot.val().email +
-    " </span><span class='member-age'> " + childSnapshot.val().age +
-    " </span><span class='member-comment'> " + childSnapshot.val().comment +
-    " </span></div>");
-  /*
-  // storing the snapshot.val() in a variable for convenience BELOW RECENT USER WITH PUSH ACTIVITY
-  var sv = snapshot.val().employeeName;
-  var sv = snapshot.val().role;
-  var sv = snapshot.val().startName;
-  var sv = snapshot.val().monthlyRate;
-  
-
-  // Console.loging the last user's data
-  console.log(sv.employeeName);
-  console.log(sv.role);
-  console.log(sv.startDate);
-  console.log(sv.monthlyRate);
-
-  // Change the HTML to reflect
-  $("#employeeName").text(sv.employeeName);
-  $("#role").text(sv.role);
-  $("#startDate").text(sv.startDate);
-  $("#monthlyRate").text(sv.monthlyRate);
-
-
-  // Handle the errors
-}, function(errorObject) {
-  console.log("Errors handled: " + errorObject.code);
-});
-*/
 
 //bring in MomentJS ???
 
