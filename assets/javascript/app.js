@@ -74,8 +74,8 @@ $("#add-train-btn").on("click", function(event) {
   
     //CREATE NEXT ARRIVAL FUNCTION
     
-    //CHANGE empStart TO firstTrain ???
-    // Prettify the employee start
+    //CHANGE empStart TO firstTrain ??? CHANGE "MM/DD/YYYY" TO MILITARY TIME
+    // Prettify??? the employee start
     var firstTrainPretty = moment.unix(firstTrain).format("MM/DD/YYYY");
   
     // Calculate the NEXT ARRIVAL AND/OR MINUTES AWAY using hardcore math
@@ -84,9 +84,10 @@ $("#add-train-btn").on("click", function(event) {
     console.log(trainArrival);
   
     // Calculate the total billed rate
-    //EDIT THIS TO GET NEXT ARRIVAL OR MINUTES AWAY
-    var empBilled = trainArrival * frequency;
-    console.log(empBilled);
+    //EDIT empBilled THIS TO GET NEXT ARRIVAL OR MINUTES AWAY
+    //CHANGE * MULTIPLE TO SOMETHING ELSE
+    var minutesAway = trainArrival * frequency;
+    console.log(minuteAway);
   
     // Create the new row
     // CONVERT firstTrainPretty TO MINUTES AWAY
@@ -95,8 +96,7 @@ $("#add-train-btn").on("click", function(event) {
       $("<td>").text(destination),
       $("<td>").text(frequency),
       $("<td>").text(trainArrival),
-      $("<td>").text(firstTrainPretty)
-      
+      $("<td>").text(firstTrainPretty) 
       
     );
   
@@ -109,7 +109,8 @@ $("#add-train-btn").on("click", function(event) {
   
 
 //bring in MomentJS ???
-
+// CHANGE DATE INFO TO MILITARY HOURS AND MINUTES
+//CONVERT??? OR OTHER MATH
 var randomDate = "02/23/1999";
     var randomFormat = "MM/DD/YYYY";
     var convertedDate = moment(randomDate, randomFormat);
